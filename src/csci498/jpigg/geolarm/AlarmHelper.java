@@ -9,12 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AlarmHelper extends SQLiteOpenHelper{
 	
-	private static final String GETALL = "SELECT _id,  name, description FROM alarms ORDER BY name";
-	private static final String GETBYID = "SELECT _id,  name, description FROM alarms WHERE _ID=?";
-	private static final String CREATETABLE = "CREATE TABLE alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT);";
+	//schema version 1:: CREATETABLE = "CREATE TABLE alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT);"
 	
+	
+	private static final String GETALL = "SELECT _id,  name, description, is_active, time, use_location, location FROM alarms ORDER BY name";
+	private static final String GETBYID = "SELECT _id,  name, description, is_active, time, use_location, location FROM alarms WHERE _ID=?";
+	private static final String CREATETABLE = "CREATE TABLE alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, is_active INTEGER, time TEXT, use_location INTEGER, location TEXT);";
 	private static final String DATABASE_NAME = "alarms.db";
-	private static final int SCHEMA_VERSION = 1;
+	private static final int SCHEMA_VERSION = 2;
 	
 	public AlarmHelper(Context context) {
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
@@ -75,7 +77,12 @@ public class AlarmHelper extends SQLiteOpenHelper{
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		//Only one version so far
+		if (oldVersion < 2) {
+			db.execSQL("ALTER TABLE alarms ADD COLUMN is_active INTEGER");
+			db.execSQL("ALTER TABLE alarms ADD COLUMN time TEXT");
+			db.execSQL("ALTER TABLE alarms ADD COLUMN use_location INTEGER");
+			db.execSQL("ALTER TABLE alarms ADD COLUMN location TEXT");
+		}
 		
 	}
 
