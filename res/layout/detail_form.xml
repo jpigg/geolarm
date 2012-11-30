@@ -8,8 +8,8 @@
         android:shrinkColumns="1"
         >
         <TableRow>
-            <CheckBox android:id="@+id/alarm_on"
-                android:text="@string/alarm_on"
+            <CheckBox android:id="@+id/is_active"
+                android:text="@string/is_active"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 />
@@ -27,11 +27,9 @@
 		</TableRow>
 		<TableRow>
 		    <CheckBox android:id="@+id/use_location"
-		        android:key="location"
 		        android:text="@string/location"/>
-		    <Button android:id="@+id/set_location"
-		        android:text="Set Location"
-		        android:dependency="location"/>
+		    <EditText android:id="@+id/location"
+		        android:text="Set Location"/>
 		</TableRow>
 		<Button android:id="@+id/save"
 			android:layout_width="match_parent"

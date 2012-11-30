@@ -6,7 +6,7 @@
     <string name="title_activity_geolarm">Geolarm</string>
     <string name="add_alarm">Add Alarm</string>
 	<string name="delete_alarm">Delete Alarm</string>
-    <string name="alarm_on">Alarm Active</string>
+    <string name="is_active">Alarm Active</string>
     <string name="alarm_name">Alarm Name:</string>
     <string name="location">Use Location</string>
     

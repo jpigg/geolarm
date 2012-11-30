@@ -4,16 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 public class DetailForm extends Activity {
 
 	EditText name = null;
 	EditText description = null;
+	CheckBox is_active = null;
+	TimePicker time = null;
+	CheckBox use_location = null;
+	EditText location = null;
 	AlarmHelper helper = null;
 	String alarmId = null;
 	
@@ -27,6 +34,10 @@ public class DetailForm extends Activity {
 		
 		name = (EditText)findViewById(R.id.name);
 		description = (EditText)findViewById(R.id.description);
+		location = (EditText)findViewById(R.id.location);
+		is_active = (CheckBox)findViewById(R.id.is_active);
+		time = (TimePicker)findViewById(R.id.time);
+		use_location = (CheckBox)findViewById(R.id.use_location);
 		
 		Button save = (Button)findViewById(R.id.save);
 		
@@ -75,6 +86,8 @@ public class DetailForm extends Activity {
 		c.moveToFirst();
 		name.setText(helper.getName(c));
 		description.setText(helper.getDescription(c));
+		time.setCurrentHour(14);
+		time.setCurrentMinute(35);
 		
 		c.close();
 	}
@@ -84,10 +97,10 @@ public class DetailForm extends Activity {
 		public void onClick(View v) {
 			//Need to check for required info
 			if (alarmId == null) {
-				helper.insert(name.getText().toString(), description.getText().toString());
+				//helper.insert(name.getText().toString(), description.getText().toString());
 			}
 			else {
-				helper.update(alarmId, name.getText().toString(), description.getText().toString());
+				//helper.update(alarmId, name.getText().toString(), description.getText().toString());
 			}
 			finish();
 		}
