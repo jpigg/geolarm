@@ -22,21 +22,29 @@ public class AlarmHelper extends SQLiteOpenHelper{
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 	}
 	
-	public void insert(String name, String description) {
+	public void insert(String name, String description, int is_active, String time, int use_location, String location) {
 		ContentValues cv = new ContentValues();
 		
 		cv.put("name", name);
 		cv.put("description", description);
+		cv.put("is_active", is_active);
+		cv.put("time", time);
+		cv.put("use_location", use_location);
+		cv.put("location", location);
 		
 		getWritableDatabase().insert("alarms", "name", cv);
 	}
 	
-	public void update(String id, String name, String description) {
+	public void update(String id, String name, String description, int is_active, String time, int use_location, String location) {
 		ContentValues cv = new ContentValues();
 		String[] args = {id};
 		
 		cv.put("name", name);
 		cv.put("description", description);
+		cv.put("is_active", is_active);
+		cv.put("time", time);
+		cv.put("use_location", use_location);
+		cv.put("location", location);
 		
 		getWritableDatabase().update("alarms", cv, "_ID=?", args);
 	}
