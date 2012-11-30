@@ -8,17 +8,35 @@
         android:shrinkColumns="1"
         >
         <TableRow>
-			<TextView android:text="Name:" />
+            <CheckBox android:id="@+id/alarm_on"
+                android:text="@string/alarm_on"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <TimePicker android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow>
+			<TextView android:text="@string/alarm_name" />
 			<EditText android:id="@+id/name" />
-			</TableRow>
-			<TableRow>
+		</TableRow>
+		<TableRow>
 			<TextView android:text="Description:" />
 			<EditText android:id="@+id/description" />
-			</TableRow>
-			<Button android:id="@+id/save"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="Save"
-				/>
+		</TableRow>
+		<TableRow>
+		    <CheckBox android:id="@+id/use_location"
+		        android:key="location"
+		        android:text="@string/location"/>
+		    <Button android:id="@+id/set_location"
+		        android:text="Set Location"
+		        android:dependency="location"/>
+		</TableRow>
+		<Button android:id="@+id/save"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Save"
+			/>
     </TableLayout> 
 </ScrollView>

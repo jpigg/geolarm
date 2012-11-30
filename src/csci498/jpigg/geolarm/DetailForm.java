@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class DetailForm extends Activity{
+public class DetailForm extends Activity {
 
 	EditText name = null;
 	EditText description = null;
@@ -61,8 +61,8 @@ public class DetailForm extends Activity{
     		else {
     			//alarm is in the database
     			helper.delete(alarmId);
-    			finish();
     		}
+    		finish();
     		return(true);
     	}
     	
