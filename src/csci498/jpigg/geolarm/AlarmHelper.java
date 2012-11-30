@@ -58,19 +58,36 @@ public class AlarmHelper extends SQLiteOpenHelper{
 		getWritableDatabase().delete("alarms", "_ID=?", args);
 	}
 	
-	public Cursor getAll()
-	{
+	public Cursor getAll() {
 		return(getReadableDatabase().rawQuery(GETALL, null));
 	}
 	
-	public String getName(Cursor c)
-	{
+	public String getName(Cursor c) {
 		return(c.getString(1));
 	}
 	
-	public String getDescription(Cursor c)
-	{
+	public String getDescription(Cursor c) {
 		return(c.getString(2));
+	}
+	
+	public int getIsActive(Cursor c) {
+		return c.getInt(3);
+	}
+	
+	public int getUseLocation(Cursor c) {
+		return c.getInt(4);
+	}
+	
+	public String getLocation(Cursor c) {
+		return c.getString(5);
+	}
+	
+	public int getHour(Cursor c) {
+		return c.getInt(6);
+	}
+	
+	public int getMinute(Cursor c) {
+		return c.getInt(7);
 	}
 	
 	public Cursor getById(String id) {

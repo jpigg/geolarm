@@ -24,6 +24,9 @@ public class DetailForm extends Activity {
 	AlarmHelper helper = null;
 	String alarmId = null;
 	
+	int intIsActive = 0;
+	int intUseLocation = 0;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,21 +89,65 @@ public class DetailForm extends Activity {
 		c.moveToFirst();
 		name.setText(helper.getName(c));
 		description.setText(helper.getDescription(c));
-		time.setCurrentHour(14);
-		time.setCurrentMinute(35);
+		location.setText(helper.getLocation(c));
+		time.setCurrentHour(helper.getHour(c));
+		time.setCurrentMinute(helper.getMinute(c));
+		if(helper.getIsActive(c) == 1) {
+			is_active.setChecked(true);
+		}
+		else {
+			is_active.setChecked(false);
+		}
+		if(helper.getUseLocation(c) == 1) {
+			use_location.setChecked(true);
+		}
+		else {
+			use_location.setChecked(false);
+		}
 		
 		c.close();
 	}
 	
+	
+	
 	private View.OnClickListener onSave = new View.OnClickListener() {
-		
-		public void onClick(View v) {
-			//Need to check for required info
-			if (alarmId == null) {
-				//helper.insert(name.getText().toString(), description.getText().toString());
+
+		private void setCheckBoxes() {
+			if(is_active.isChecked()) {
+				intIsActive = 1;
 			}
 			else {
-				//helper.update(alarmId, name.getText().toString(), description.getText().toString());
+				intIsActive = 0;
+			}
+			if(use_location.isChecked()) {
+				intUseLocation = 1;
+			}
+			else {
+				intUseLocation = 0;
+			}
+		}
+		//String name, String description, int is_active, int use_location, String location, int hour, int minute
+		public void onClick(View v) {
+			//Need to check for required info
+			setCheckBoxes();
+			if (alarmId == null) {
+				helper.insert(name.getText().toString(),
+						description.getText().toString(),
+						intIsActive,
+						intUseLocation,
+						location.getText().toString(),
+						time.getCurrentHour(),
+						time.getCurrentMinute());
+			}
+			else {
+				helper.update(alarmId,
+						name.getText().toString(),
+						description.getText().toString(),
+						intIsActive,
+						intUseLocation,
+						location.getText().toString(),
+						time.getCurrentHour(),
+						time.getCurrentMinute());
 			}
 			finish();
 		}
