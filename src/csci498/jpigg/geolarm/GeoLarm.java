@@ -95,16 +95,63 @@ public class GeoLarm extends ListActivity {
 	static class AlarmHolder {
 		private TextView name = null;
 		private TextView description = null;
+		private ImageView icon = null;
+		private TextView time = null;
 		
 		AlarmHolder(View row) {
 			name = (TextView)row.findViewById(R.id.name);
 			description = (TextView)row.findViewById(R.id.description);
+			icon = (ImageView)row.findViewById(R.id.icon);
+			time = (TextView)row.findViewById(R.id.time);
 			
+		}
+		
+		String buildTimeString(Cursor c, AlarmHelper helper) {
+			StringBuilder builder = new StringBuilder();
+			
+			int hour = helper.getHour(c);
+			int minute = helper.getMinute(c);
+			
+			if(hour < 12) {
+				if(hour == 0) {
+					builder.append("12");
+				}
+				else {
+					builder.append(hour);
+				}
+			}
+			else {
+				builder.append(hour-12);
+			}
+			builder.append(":");
+			if(minute < 10) {
+				builder.append("0");
+			}
+			builder.append(minute);
+			
+			if(hour < 12) {
+				builder.append("AM");
+			}
+			else {
+				builder.append("PM");
+			}
+			
+			return builder.toString();
 		}
 		
 		void populateFrom(Cursor c, AlarmHelper helper) {
 			name.setText(helper.getName(c));
 			description.setText(helper.getDescription(c));
+			
+			//Sets the clock icon to be green if active, grey if inactive
+			if(helper.getIsActive(c) == 1) {
+				icon.setImageResource(R.drawable.alarm_on);
+			}
+			else {
+				icon.setImageResource(R.drawable.alarm_off);
+			}
+			
+			time.setText(buildTimeString(c, helper));
 		}
 	}
 }

@@ -11,7 +11,8 @@ public class AlarmActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("GeoLarm", "Alarm activity was called");
+		long currentTime = System.currentTimeMillis();
+		Log.i("GeoLarm", "Alarm activity was called at time " + currentTime);
 		setContentView(R.layout.alarm_activity);
 	}
 

@@ -25,7 +25,7 @@ public class DetailForm extends Activity {
 	AlarmHelper helper = null;
 	String alarmId = null;
 	
-	int intWasActive = -1;
+	int intWasActive = 0;
 	int intIsActive = 0;
 	int intUseLocation = 0;
 	
@@ -142,6 +142,22 @@ public class DetailForm extends Activity {
 			//if intWasActive == -1 then there was no alarm to load, ie it's a newly created alarm
 			//not sure what to do yet if alarmId == null to use for the id for the pending intent in onBootReceiver
 			
+			if(intWasActive == 1)
+			{
+				OnBootReceiver.cancelAlarm(DetailForm.this, alarm.getAlarmId());
+				if(intIsActive == 1) {
+					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
+				}
+			}
+			else { // intWasActive == 0
+				
+				if(intIsActive == 1) {
+					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
+				}
+			}
+			
+			
+			/*
 			//alarm was previously off
 			if(intWasActive == 0) {
 				//alarm needs to be set
@@ -171,6 +187,7 @@ public class DetailForm extends Activity {
 				}
 				
 			}
+			*/
 			
 		}
 		
