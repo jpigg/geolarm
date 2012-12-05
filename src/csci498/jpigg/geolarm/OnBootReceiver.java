@@ -30,13 +30,14 @@ public class OnBootReceiver extends BroadcastReceiver {
 		int hour = helper.getHour(c);
 		int minute = helper.getMinute(c);
 		
+		c.close();
+		
 		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		
-		Log.i("GeoLarm", String.valueOf(hour));
-		Log.i("GeoLarm", String.valueOf(minute));
+		Log.i("GeoLarm", String.valueOf("Setting an alarm at " + hour + ":" + minute +"."));
 		
 		if(cal.getTimeInMillis() < System.currentTimeMillis()) {
 			cal.add(Calendar.DAY_OF_YEAR, 1);
@@ -44,7 +45,6 @@ public class OnBootReceiver extends BroadcastReceiver {
 		
 		//may need to change based on whether the alarm is snoozed or dismissed..
 		mgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, getPendingIntent(ctxt, alarmId));
-		Log.i("GeoLarm", "finished setAlarm");
 	}
 	
 	//Needs to be called when the use alarm is unchecked, or the time is changed
@@ -54,9 +54,9 @@ public class OnBootReceiver extends BroadcastReceiver {
 		mgr.cancel(getPendingIntent(ctxt, alarmId));
 	}
 	
+	//returns the pending intent based of the alarmId
 	private static PendingIntent getPendingIntent(Context ctxt, String alarmId) {
 		Intent i = new Intent(ctxt, OnAlarmReceiver.class);
-		Log.i("GeoLarm", "returning pendingIntent with id=" + alarmId);
 		return(PendingIntent.getBroadcast(ctxt, Integer.parseInt(alarmId) , i, 0));
 	}
 

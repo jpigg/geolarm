@@ -147,7 +147,6 @@ public class DetailForm extends Activity {
 				//alarm needs to be set
 				if(intIsActive == 1) {
 					//turning alarm from off to on
-					Log.i("GeoLarm", "alarm id " + alarm.getAlarmId() + " just activated alarm");
 					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
 				}
 				else {
@@ -158,7 +157,6 @@ public class DetailForm extends Activity {
 			else if (intWasActive == 1) {
 				if(intIsActive == 0) {
 					//turning alarm from on to off
-					Log.i("GeoLarm", "alarm id " + alarm.getAlarmId() + " just deactivated alarm");
 					OnBootReceiver.cancelAlarm(DetailForm.this, alarm.getAlarmId());
 				}
 				else {
@@ -169,6 +167,7 @@ public class DetailForm extends Activity {
 			else {
 				if(intIsActive == 1) {
 					//alarm needs to be set
+					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
 				}
 				
 			}
@@ -180,9 +179,10 @@ public class DetailForm extends Activity {
 			//Need to check for required info
 			setCheckBoxes();
 			
+			Alarm alarm = new Alarm();
 			
 			if (alarmId == null) {
-				helper.insert(name.getText().toString(),
+				alarmId = helper.insert(name.getText().toString(),
 						description.getText().toString(),
 						intIsActive,
 						intUseLocation,
@@ -201,8 +201,6 @@ public class DetailForm extends Activity {
 						time.getCurrentMinute());
 			}
 			
-			
-			Alarm alarm = new Alarm();
 			alarm.setName(name.getText().toString());
 			alarm.setDescription(description.getText().toString());
 			alarm.setIsActive(intIsActive);

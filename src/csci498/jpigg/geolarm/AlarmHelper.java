@@ -16,6 +16,7 @@ public class AlarmHelper extends SQLiteOpenHelper{
 	private static final String GETALL = "SELECT _id,  name, description, is_active, use_location, location, hour, minute FROM alarms ORDER BY name";
 	private static final String GETBYID = "SELECT _id,  name, description, is_active, use_location, location, hour, minute FROM alarms WHERE _ID=?";
 	private static final String CREATETABLE = "CREATE TABLE alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, is_active INTEGER, use_location INTEGER, location TEXT, hour INTEGER, minute INTEGER);";
+	//private static final String GETLASTINSERTEDID = "SELECT _id FROM alarms ORDER BY _id DESC limit 1";
 	private static final String DATABASE_NAME = "alarms.db";
 	private static final int SCHEMA_VERSION = 3;
 	
@@ -23,7 +24,7 @@ public class AlarmHelper extends SQLiteOpenHelper{
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 	}
 	
-	public void insert(String name, String description, int is_active, int use_location, String location, int hour, int minute) {
+	public String insert(String name, String description, int is_active, int use_location, String location, int hour, int minute) {
 		ContentValues cv = new ContentValues();
 		
 		cv.put("name", name);
@@ -34,7 +35,7 @@ public class AlarmHelper extends SQLiteOpenHelper{
 		cv.put("hour", hour);
 		cv.put("minute", minute);
 		
-		getWritableDatabase().insert("alarms", "name", cv);
+		return String.valueOf(getWritableDatabase().insert("alarms", "name", cv));
 	}
 	
 	public void update(String id, String name, String description, int is_active, int use_location, String location, int hour, int minute) {
@@ -84,7 +85,6 @@ public class AlarmHelper extends SQLiteOpenHelper{
 	}
 	
 	public int getHour(Cursor c) {
-		Log.i("GeoLarm", "in get hour");
 		return c.getInt(6);
 	}
 	
@@ -97,7 +97,6 @@ public class AlarmHelper extends SQLiteOpenHelper{
 		
 		return(getReadableDatabase().rawQuery(GETBYID, args));
 	}
-	
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
