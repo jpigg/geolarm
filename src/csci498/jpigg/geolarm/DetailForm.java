@@ -53,6 +53,9 @@ public class DetailForm extends Activity {
 		if(alarmId!=null) {
 			load();
 		}
+		else {
+			loadDefaults();
+		}
 	}
 	
 	@Override
@@ -117,7 +120,41 @@ public class DetailForm extends Activity {
 		c.close();
 	}
 	
+	String buildTimeString(int hour, int minute) {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("Alarm ");
+		if(hour < 12) {
+			if(hour == 0) {
+				builder.append("12");
+			}
+			else {
+				builder.append(hour);
+			}
+		}
+		else {
+			builder.append(hour-12);
+		}
+		builder.append(":");
+		if(minute < 10) {
+			builder.append("0");
+		}
+		builder.append(minute);
+		
+		if(hour < 12) {
+			builder.append("AM");
+		}
+		else {
+			builder.append("PM");
+		}
+		
+		return builder.toString();
+	}
 	
+	private void loadDefaults() {
+		name.setText(buildTimeString(time.getCurrentHour(), time.getCurrentMinute()));
+		is_active.setChecked(true);
+	}
 	
 	private View.OnClickListener onSave = new View.OnClickListener() {
 

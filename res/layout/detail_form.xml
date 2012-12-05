@@ -1,43 +1,65 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TableLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
-        android:shrinkColumns="1"
         >
-        <TableRow>
-            <CheckBox android:id="@+id/is_active"
-                android:text="@string/is_active"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:onClick="onActivateClick"
-                />
-        </TableRow>
-        <TableRow>
-            <TimePicker android:id="@+id/time"
+        <LinearLayout
+            android:id="@+id/checkboxes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        </TableRow>
-        <TableRow>
-			<TextView android:text="@string/alarm_name" />
-			<EditText android:id="@+id/name" />
-		</TableRow>
-		<TableRow>
-			<TextView android:text="Description:" />
-			<EditText android:id="@+id/description" />
-		</TableRow>
-		<TableRow>
-		    <CheckBox android:id="@+id/use_location"
-		        android:text="@string/location"/>
-		    <EditText android:id="@+id/location"
-		        android:text="Set Location"/>
-		</TableRow>
-		<Button android:id="@+id/save"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="Save"
-			/>
-    </TableLayout> 
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <CheckBox android:id="@+id/is_active"
+		        android:text="@string/is_active"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:onClick="onActivateClick"
+		        android:layout_marginLeft="12dip"
+		        />
+	        <CheckBox 
+	            android:id="@+id/use_location"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:text="@string/location"
+		        android:layout_marginLeft="12dip"
+		        />
+        </LinearLayout>
+        <TimePicker android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkboxes"
+            android:layout_alignParentLeft="true"
+            android:padding="12dip"
+            />
+	        <TableLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:stretchColumns="1"
+	        android:shrinkColumns="1"
+	        android:layout_below="@id/time"
+	        >
+	        <TableRow>
+				<TextView android:text="@string/alarm_name" />
+				<EditText android:id="@+id/name" />
+			</TableRow>
+			<TableRow>
+				<TextView android:text="Description:" />
+				<EditText android:id="@+id/description" />
+			</TableRow>
+			<TableRow>
+			    <TextView android:text="Location:" />
+			    <EditText android:id="@+id/location"
+			        android:text="Set Location"/>
+			</TableRow>
+			<Button android:id="@+id/save"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Save"
+				android:padding="12dip"
+				android:layout_marginTop="20dip"
+				/>
+		</TableLayout> 
+    </RelativeLayout>
 </ScrollView>
