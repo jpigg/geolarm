@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.util.Log;
 
 public class DetailForm extends Activity {
 
@@ -24,6 +25,7 @@ public class DetailForm extends Activity {
 	AlarmHelper helper = null;
 	String alarmId = null;
 	
+	int intWasActive = -1;
 	int intIsActive = 0;
 	int intUseLocation = 0;
 	
@@ -83,6 +85,11 @@ public class DetailForm extends Activity {
     	return super.onOptionsItemSelected(item);
     }
 	
+	//called when the use alarm checkbox is clicked
+	public void onActivateClick(View view) {
+		//not sure if i'll need this or not
+	}
+	
 	private void load() {
 		Cursor c = helper.getById(alarmId);
 		
@@ -94,9 +101,11 @@ public class DetailForm extends Activity {
 		time.setCurrentMinute(helper.getMinute(c));
 		if(helper.getIsActive(c) == 1) {
 			is_active.setChecked(true);
+			intWasActive = 1;
 		}
 		else {
 			is_active.setChecked(false);
+			intWasActive = 0;
 		}
 		if(helper.getUseLocation(c) == 1) {
 			use_location.setChecked(true);
@@ -126,10 +135,52 @@ public class DetailForm extends Activity {
 				intUseLocation = 0;
 			}
 		}
+		
+		//sets or cancels alarms as needed
+		private void doAlarmChecks(Alarm alarm) {
+			//Need to call onBootReceiver alarm methods here based on intIsActive and intWasActive
+			//if intWasActive == -1 then there was no alarm to load, ie it's a newly created alarm
+			//not sure what to do yet if alarmId == null to use for the id for the pending intent in onBootReceiver
+			
+			//alarm was previously off
+			if(intWasActive == 0) {
+				//alarm needs to be set
+				if(intIsActive == 1) {
+					//turning alarm from off to on
+					Log.i("GeoLarm", "alarm id " + alarm.getAlarmId() + " just activated alarm");
+					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
+				}
+				else {
+					//alarm stays off
+				}
+			}
+			//alarm was previously on
+			else if (intWasActive == 1) {
+				if(intIsActive == 0) {
+					//turning alarm from on to off
+					Log.i("GeoLarm", "alarm id " + alarm.getAlarmId() + " just deactivated alarm");
+					OnBootReceiver.cancelAlarm(DetailForm.this, alarm.getAlarmId());
+				}
+				else {
+					//alarm stays on
+				}
+			}
+			//alarm is new
+			else {
+				if(intIsActive == 1) {
+					//alarm needs to be set
+				}
+				
+			}
+			
+		}
+		
 		//String name, String description, int is_active, int use_location, String location, int hour, int minute
 		public void onClick(View v) {
 			//Need to check for required info
 			setCheckBoxes();
+			
+			
 			if (alarmId == null) {
 				helper.insert(name.getText().toString(),
 						description.getText().toString(),
@@ -149,6 +200,20 @@ public class DetailForm extends Activity {
 						time.getCurrentHour(),
 						time.getCurrentMinute());
 			}
+			
+			
+			Alarm alarm = new Alarm();
+			alarm.setName(name.getText().toString());
+			alarm.setDescription(description.getText().toString());
+			alarm.setIsActive(intIsActive);
+			alarm.setUseLocation(intUseLocation);
+			alarm.setHour(time.getCurrentHour());
+			alarm.setMinute(time.getCurrentMinute());
+			alarm.setLocation(location.getText().toString());
+			alarm.setAlarmId(alarmId);
+			
+			doAlarmChecks(alarm);
+			
 			finish();
 		}
 	};
