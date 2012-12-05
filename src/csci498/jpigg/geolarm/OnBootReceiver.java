@@ -30,7 +30,7 @@ public class OnBootReceiver extends BroadcastReceiver {
 		int hour = helper.getHour(c);
 		int minute = helper.getMinute(c);
 		
-		cal.set(Calendar.HOUR, hour);
+		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
