@@ -4,4 +4,9 @@
         android:title="@string/add_alarm"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/fake"
+        android:title="fake an alarm"
+        android:orderInCategory="50"
+        android:showAsAction="never"
+        />
 </menu>

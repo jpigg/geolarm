@@ -20,10 +20,11 @@ public final class R {
     }
     public static final class id {
         public static final int add=0x7f07000a;
-        public static final int add_alarm=0x7f07000b;
+        public static final int add_alarm=0x7f07000c;
         public static final int checkboxes=0x7f070000;
         public static final int delete=0x7f070009;
         public static final int description=0x7f070005;
+        public static final int fake=0x7f07000b;
         public static final int icon=0x7f070008;
         public static final int is_active=0x7f070001;
         public static final int location=0x7f070006;

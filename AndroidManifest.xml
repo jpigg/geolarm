@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlarmActivity"></activity>
+        <activity android:name=".AlarmActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
         <activity android:name=".DetailForm"></activity>
         <receiver android:name=".OnBootReceiver" android:enabled="false">
             <intent-filter>

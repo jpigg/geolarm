@@ -54,6 +54,12 @@ public class GeoLarm extends ListActivity {
     		startActivity(new Intent(GeoLarm.this, DetailForm.class));
     		return(true);
     	}
+    	else if(item.getItemId() == R.id.fake) {
+    		//This should be removed, exists only for testing
+    		startActivity(new Intent(GeoLarm.this, AlarmActivity.class));
+    		return(true);
+    		
+    	}
     	
     	return super.onOptionsItemSelected(item);
     }
