@@ -55,8 +55,9 @@ public class GeoLarm extends ListActivity {
     		return(true);
     	}
     	else if(item.getItemId() == R.id.fake) {
-    		//This should be removed, exists only for testing
-    		startActivity(new Intent(GeoLarm.this, AlarmActivity.class));
+    		Intent i = new Intent(GeoLarm.this, AlarmActivity.class);
+    		i.putExtra(OnBootReceiver.ID_EXTRA, "-2");
+    		startActivity(i);
     		return(true);
     	}
     	else if(item.getItemId() == R.id.prefs) {
@@ -127,6 +128,9 @@ public class GeoLarm extends ListActivity {
 				else {
 					builder.append(hour);
 				}
+			}
+			else if(hour == 12) {
+				builder.append("12");
 			}
 			else {
 				builder.append(hour-12);

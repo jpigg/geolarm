@@ -12,6 +12,8 @@ import android.util.Log;
 
 public class OnBootReceiver extends BroadcastReceiver {
 	
+	public final static String ID_EXTRA = "csci498.jpigg.geolarm._ID";
+	
 	@Override
 	public void onReceive(Context ctxt, Intent intent) {
 		
@@ -55,6 +57,7 @@ public class OnBootReceiver extends BroadcastReceiver {
 	//returns the pending intent based of the alarmId
 	private static PendingIntent getPendingIntent(Context ctxt, String alarmId) {
 		Intent i = new Intent(ctxt, OnAlarmReceiver.class);
+		i.putExtra(ID_EXTRA, alarmId);
 		return(PendingIntent.getBroadcast(ctxt, Integer.parseInt(alarmId) , i, 0));
 	}
 
