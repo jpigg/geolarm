@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="Wake up bitches!!"
-	android:textSize="30sp"
-	android:textStyle="bold"
-	/>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alarm_info"
+    android:layout_width="280dip"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    <TableRow>
+		<TextView
+		    android:id="@+id/alarm_time"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="alarmTime"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:layout_weight="0.5"
+			/>
+		<TextView
+		    android:id="@+id/alarm_name"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="alarmName"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:layout_weight="0.5"
+			/>
+    </TableRow>
+    <TableRow>
+      	<Button android:id="@+id/snooze"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Snooze"
+			android:padding="20dip"
+			android:layout_weight="0.5"
+			/>
+      	<Button android:id="@+id/dismiss"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Dismiss"
+			android:padding="20dip"
+			android:layout_weight="0.5"
+			/>
+    </TableRow>
+</TableLayout>

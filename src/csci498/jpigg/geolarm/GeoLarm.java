@@ -58,7 +58,9 @@ public class GeoLarm extends ListActivity {
     		//This should be removed, exists only for testing
     		startActivity(new Intent(GeoLarm.this, AlarmActivity.class));
     		return(true);
-    		
+    	}
+    	else if(item.getItemId() == R.id.prefs) {
+    		startActivity(new Intent(GeoLarm.this, EditPreferences.class));
     	}
     	
     	return super.onOptionsItemSelected(item);

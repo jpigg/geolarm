@@ -26,7 +26,6 @@ public class OnBootReceiver extends BroadcastReceiver {
 		Cursor c = helper.getById(alarmId);
 		c.moveToFirst();
 		
-		//hour and minute should be passed in and set somehow..
 		int hour = helper.getHour(c);
 		int minute = helper.getMinute(c);
 		
@@ -43,7 +42,6 @@ public class OnBootReceiver extends BroadcastReceiver {
 			cal.add(Calendar.DAY_OF_YEAR, 1);
 		}
 		
-		//may need to change based on whether the alarm is snoozed or dismissed..
 		mgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, getPendingIntent(ctxt, alarmId));
 	}
 	

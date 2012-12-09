@@ -9,4 +9,9 @@
         android:orderInCategory="50"
         android:showAsAction="never"
         />
+    <item android:id="@+id/prefs"
+        android:title="Preferences"
+        android:orderInCategory="150"
+        android:showAsAction="never"
+        />
 </menu>

@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<EditTextPreference
+	    android:key="snooze_length"
+	    android:title="Snooze Length"
+	    android:summary="Enter the snooze time (in minutes)"
+	    android:defaultValue="10"
+	    />
+	<RingtonePreference 
+	    android:key="alarm_ringtone"
+	    android:title="Alarm Ringtone"
+	    android:summary="Select the ringtone to use as an alarm"
+	    />
+</PreferenceScreen>
