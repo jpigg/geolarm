@@ -4,7 +4,7 @@ public class Alarm {
 	private String alarmId = "";
 	private String name = "";
 	private String description = "";
-	//location will probably need to change from a string
+	//location will probably need to change from a string to store latitude and longitude
 	private String location = "";
 	private int isActive = 0;
 	private int useLocation = 0;
@@ -78,6 +78,5 @@ public class Alarm {
 	public void setMinute(int minute) {
 		this.minute = minute;
 	}
-	
 
 }

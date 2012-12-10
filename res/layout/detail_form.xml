@@ -15,7 +15,6 @@
 		        android:text="@string/is_active"
 		        android:layout_width="wrap_content"
 		        android:layout_height="match_parent"
-		        android:onClick="onActivateClick"
 		        android:layout_marginLeft="12dip"
 		        />
 	        <CheckBox 
@@ -45,18 +44,18 @@
 				<EditText android:id="@+id/name" />
 			</TableRow>
 			<TableRow>
-				<TextView android:text="Description:" />
+				<TextView android:text="@string/description_label" />
 				<EditText android:id="@+id/description" />
 			</TableRow>
 			<TableRow>
-			    <TextView android:text="Location:" />
+			    <TextView android:text="@string/location_label" />
 			    <EditText android:id="@+id/location"
-			        android:text="Set Location"/>
+			        android:text="@string/location_default_text"/>
 			</TableRow>
 			<Button android:id="@+id/save"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="Save"
+				android:text="@string/save_button"
 				android:padding="12dip"
 				android:layout_marginTop="20dip"
 				/>

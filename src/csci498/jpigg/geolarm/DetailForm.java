@@ -84,14 +84,8 @@ public class DetailForm extends Activity {
     		finish();
     		return(true);
     	}
-    	
     	return super.onOptionsItemSelected(item);
     }
-	
-	//called when the use alarm checkbox is clicked
-	public void onActivateClick(View view) {
-		//not sure if i'll need this or not
-	}
 	
 	private void load() {
 		Cursor c = helper.getById(alarmId);
@@ -177,8 +171,6 @@ public class DetailForm extends Activity {
 		private void doAlarmChecks(Alarm alarm) {
 			//Need to call onBootReceiver alarm methods here based on intIsActive and intWasActive
 			//if intWasActive == -1 then there was no alarm to load, ie it's a newly created alarm
-			//not sure what to do yet if alarmId == null to use for the id for the pending intent in onBootReceiver
-			
 			if(intWasActive == 1)
 			{
 				OnBootReceiver.cancelAlarm(DetailForm.this, alarm.getAlarmId());
@@ -192,40 +184,6 @@ public class DetailForm extends Activity {
 					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
 				}
 			}
-			
-			
-			/*
-			//alarm was previously off
-			if(intWasActive == 0) {
-				//alarm needs to be set
-				if(intIsActive == 1) {
-					//turning alarm from off to on
-					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
-				}
-				else {
-					//alarm stays off
-				}
-			}
-			//alarm was previously on
-			else if (intWasActive == 1) {
-				if(intIsActive == 0) {
-					//turning alarm from on to off
-					OnBootReceiver.cancelAlarm(DetailForm.this, alarm.getAlarmId());
-				}
-				else {
-					//alarm stays on
-				}
-			}
-			//alarm is new
-			else {
-				if(intIsActive == 1) {
-					//alarm needs to be set
-					OnBootReceiver.setAlarm(DetailForm.this, alarm.getAlarmId());
-				}
-				
-			}
-			*/
-			
 		}
 		
 		//String name, String description, int is_active, int use_location, String location, int hour, int minute

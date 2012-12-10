@@ -73,8 +73,6 @@ public class GeoLarm extends ListActivity {
     	i.putExtra(ID_EXTRA, String.valueOf(id));
     	startActivity(i);
     }
-    
-	
 	
 	class AlarmAdapter extends CursorAdapter {
 		
@@ -166,4 +164,5 @@ public class GeoLarm extends ListActivity {
 			time.setText(buildTimeString(c, helper));
 		}
 	}
+	
 }

@@ -9,5 +9,13 @@
     <string name="is_active">Alarm Active</string>
     <string name="alarm_name">Alarm Name:</string>
     <string name="location">Use Location</string>
+    <string name="snooze_alarm_name">Snoozed Alarm</string>
+    <string name="empty">Click the MENU button to add an alarm</string>
+    <string name="snooze_button">Snooze</string>
+    <string name="dismiss_button">Dismiss</string>
+    <string name="save_button">Save</string>
+    <string name="description_label">Description:</string>
+    <string name="location_label">Location:</string>
+    <string name="location_default_text">Set Location</string>
     
 </resources>

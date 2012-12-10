@@ -16,7 +16,7 @@ public class AlarmHelper extends SQLiteOpenHelper{
 	private static final String GETALL = "SELECT _id,  name, description, is_active, use_location, location, hour, minute FROM alarms ORDER BY name";
 	private static final String GETBYID = "SELECT _id,  name, description, is_active, use_location, location, hour, minute FROM alarms WHERE _ID=?";
 	private static final String CREATETABLE = "CREATE TABLE alarms (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, is_active INTEGER, use_location INTEGER, location TEXT, hour INTEGER, minute INTEGER);";
-	//private static final String GETLASTINSERTEDID = "SELECT _id FROM alarms ORDER BY _id DESC limit 1";
+	
 	private static final String DATABASE_NAME = "alarms.db";
 	private static final int SCHEMA_VERSION = 3;
 	
@@ -111,12 +111,12 @@ public class AlarmHelper extends SQLiteOpenHelper{
 			db.execSQL("ALTER TABLE alarms ADD COLUMN use_location INTEGER");
 			db.execSQL("ALTER TABLE alarms ADD COLUMN location TEXT");
 		}
+		
 		//deleting time column to replace it with minute and hour columns
 		if (oldVersion <3) {
 			db.execSQL("DROP TABLE IF EXISTS alarms;");
 			db.execSQL(CREATETABLE);
 		}
-		
 	}
 
 }

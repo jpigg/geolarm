@@ -38,8 +38,6 @@ public class OnBootReceiver extends BroadcastReceiver {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		
-		Log.i("GeoLarm", String.valueOf("Setting an alarm at " + hour + ":" + minute +"."));
-		
 		if(cal.getTimeInMillis() < System.currentTimeMillis()) {
 			cal.add(Calendar.DAY_OF_YEAR, 1);
 		}

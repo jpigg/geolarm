@@ -29,8 +29,6 @@ public class AlarmActivity extends Activity  implements MediaPlayer.OnPreparedLi
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		long currentTime = System.currentTimeMillis();
-		Log.i("GeoLarm", "Alarm activity was called at time " + currentTime);
 		setContentView(R.layout.alarm_activity);
 		
 		alarmName = (TextView)findViewById(R.id.alarm_name);
@@ -42,7 +40,7 @@ public class AlarmActivity extends Activity  implements MediaPlayer.OnPreparedLi
 		String id = getIntent().getStringExtra(OnBootReceiver.ID_EXTRA);
 		if(id.equals("-1")) {
 			//Snoozed alarm
-			name = "Snoozed alarm";
+			name = getResources().getString(R.string.snooze_alarm_name);
 		}
 		else if (id.equals("-2")) {
 			//Forced fake alarm
@@ -53,6 +51,7 @@ public class AlarmActivity extends Activity  implements MediaPlayer.OnPreparedLi
 			Cursor c = helper.getById(id);
 			c.moveToFirst();
 			name = helper.getName(c);
+			c.close();
 		}
 		
 		alarmTime.setText(buildTimeString());
@@ -129,11 +128,9 @@ public class AlarmActivity extends Activity  implements MediaPlayer.OnPreparedLi
 	private View.OnClickListener onDismiss = new View.OnClickListener() {
 
 		public void onClick(View v) {
-			//I don't think onDismiss needs to do anything since the alarm is already set to repeat the next day
+			//Dismisses the alarm, doesn't perform any actions
 			finish();
-			
 		}
-		
 	};
 	
 	private View.OnClickListener onSnooze = new View.OnClickListener() {
@@ -159,12 +156,8 @@ public class AlarmActivity extends Activity  implements MediaPlayer.OnPreparedLi
 			
 			//Should add a notification that can dismiss the pending snoozed alarm (id = -1)
 			
-			Log.i("GeoLarm", "hit snooze");
-			
 			finish();
-			
 		}
 	};
 	
-
 }
